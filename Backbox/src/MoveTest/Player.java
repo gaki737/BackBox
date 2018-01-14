@@ -38,7 +38,7 @@ public class Player {
     
     public void update (float timeSinceLastFrame){
         
-        //Hier wird die Bewegungssteuerung an den Player übergeben
+        //Hier wird die Bewegungssteuerung an den Player uebergeben
         if(Keyboard.isKeyDown(KeyEvent.VK_W))f_posy-=300*timeSinceLastFrame;
         if(Keyboard.isKeyDown(KeyEvent.VK_S))f_posy+=300*timeSinceLastFrame;
         if(Keyboard.isKeyDown(KeyEvent.VK_D))f_posx+=300*timeSinceLastFrame;

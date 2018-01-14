@@ -29,7 +29,7 @@ public class MoveTest {
         f.makeStrat();
 
 //      Fullscreen funktioniert auf meinem System nicht so ganz da ich keinen Desktop
-//      sondern einen WindowManager habe, deswegen lasse ich den Fullscreen außen vor.
+//      sondern einen WindowManager habe, deswegen lasse ich den Fullscreen aussen vor.
         DisplayMode displayMode = new DisplayMode (1280, 800, -1, 60);
         GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice device = environment.getDefaultScreenDevice();
@@ -38,7 +38,7 @@ public class MoveTest {
         device.setDisplayMode(displayMode);
         long lastFrame = System.currentTimeMillis();
         
-        //Ein Loop der abfragen tätigt die durchgehend laufen müssen.
+        //Ein Loop der abfragen taetigt die durchgehend laufen muessen.
         while(true){
             if(Keyboard.isKeyDown(KeyEvent.VK_ESCAPE))System.exit(0);
             long thisFrame = System.currentTimeMillis();
