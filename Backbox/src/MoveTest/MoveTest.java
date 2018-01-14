@@ -14,7 +14,7 @@ public class MoveTest {
         
         //Spieler, Hintergrund und das Frame werden erstellt. 
         
-        Player player = new Player(300, 300, 50, 1280, 800);
+        Player player = new Player(300, 300, 50, 1920, 1080);
         Background bg = new Background(100);
         Frame f = new Frame(player, bg);
         
@@ -30,7 +30,7 @@ public class MoveTest {
 
 //      Fullscreen funktioniert auf meinem System nicht so ganz da ich keinen Desktop
 //      sondern einen WindowManager habe, deswegen lasse ich den Fullscreen aussen vor.
-        DisplayMode displayMode = new DisplayMode (1280, 800, -1, 60);
+        DisplayMode displayMode = new DisplayMode (1920, 1080, 32, 60);
         GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice device = environment.getDefaultScreenDevice();
         
