@@ -61,7 +61,7 @@ public class Launcher extends JFrame {
 		btnLaunch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				int chosenSetting = comboBox.getSelectedIndex();
+				final int chosenSetting = comboBox.getSelectedIndex();
 				
 				if(chosenSetting != -1)
 				{
