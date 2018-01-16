@@ -21,7 +21,7 @@ public class MoveTest {
         //Das Frame wird gesetzt
         
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(800, 600);
+        f.setSize(width, height);
         f.setUndecorated(true);
         f.setVisible(true);
         f.setResizable(false);
@@ -51,7 +51,7 @@ public class MoveTest {
             
             
             try {
-                Thread.sleep(15);
+                Thread.sleep(1000/refreshRate);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
