@@ -19,12 +19,14 @@ import javax.swing.JTable;
 import javax.swing.JComboBox;
 
 public class Launcher extends JFrame {
-	
-	private Launcher frame;
+
+	private static Launcher frame;
 	private JPanel contentPane;
+	private JTable table;
 	private JComboBox comboBox;
 	
-	private GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	
+    private GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     private GraphicsDevice device = environment.getDefaultScreenDevice();
     private DisplayMode[] ds = device.getDisplayModes();
 
@@ -35,9 +37,8 @@ public class Launcher extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Launcher frame = new Launcher();
+					frame = new Launcher();
 					frame.setVisible(true);
-					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,38 +50,63 @@ public class Launcher extends JFrame {
 	 * Create the frame.
 	 */
 	public Launcher() {
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 640, 530);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		
 		JButton btnLaunch = new JButton("Launch");
 		btnLaunch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
+			public void actionPerformed(ActionEvent arg0) 
+			{
 				int chosenSetting = comboBox.getSelectedIndex();
 				
-				if(chosenSetting != -1){
-					MoveTest game = new MoveTest();
-					//game.RunGame(ds[chosenSetting].getWidth(), ds[chosenSetting].getHeight(), ds[chosenSetting].getBitDepth(), ds[chosenSetting].getRefreshRate());
-					frame.dispose();
-				}
-				
+				if(chosenSetting != -1)
+				{
+					Thread t1 = new Thread(new Runnable() {
+						
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+						    MoveTest game = new MoveTest();
+						    game.RunGame(ds[chosenSetting].getWidth(), ds[chosenSetting].getHeight(), ds[chosenSetting].getBitDepth(), ds[chosenSetting].getRefreshRate());
+						    
+						}
+					});
+
+					t1.start();
+			    frame.setVisible(false);
+			    frame.dispose();
+			    }
 			}
 		});
 		contentPane.add(btnLaunch, BorderLayout.SOUTH);
 		
+		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		contentPane.add(table, BorderLayout.CENTER);
+		
 		comboBox = new JComboBox();
 		contentPane.add(comboBox, BorderLayout.NORTH);
 		
-	     
-	   	for(DisplayMode displayMode : ds){
-	   		comboBox.addItem(displayMode.getWidth() + "x" + displayMode.getHeight() + " " + displayMode.getRefreshRate() + " " + displayMode.getBitDepth());
-	   	}
+		fillComboBoxWithDisplayModes();
+		
+		
+		
+
+	    
+		
+	}
+	
+	private void fillComboBoxWithDisplayModes()
+	{
+		
+	    for (DisplayMode displayMode : ds) 
+	    {
+			comboBox.addItem(displayMode.getWidth() + "x" + displayMode.getHeight() + " " + displayMode.getRefreshRate() + "Hz " + displayMode.getBitDepth());
+		}
 	    
 	}
 }
