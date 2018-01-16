@@ -10,11 +10,11 @@ import javax.swing.JFrame;
 
 // Hauptklasse
 public class MoveTest {
-    public static void main(String[] args) {
+    public static void RunGame(int width, int height, int bitDepth, int refreshRate) {
         
         //Spieler, Hintergrund und das Frame werden erstellt. 
         
-        Player player = new Player(300, 300, 50, 1920, 1080);
+        Player player = new Player(300, 300, 50, width, height);
         Background bg = new Background(100);
         Frame f = new Frame(player, bg);
         
@@ -30,7 +30,7 @@ public class MoveTest {
 
 //      Fullscreen funktioniert auf meinem System nicht so ganz da ich keinen Desktop
 //      sondern einen WindowManager habe, deswegen lasse ich den Fullscreen aussen vor.
-        DisplayMode displayMode = new DisplayMode (1920, 1080, 32, 60);
+        DisplayMode displayMode = new DisplayMode (width, height, bitDepth, refreshRate);
         GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice device = environment.getDefaultScreenDevice();
         
