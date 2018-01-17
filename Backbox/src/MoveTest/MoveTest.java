@@ -4,13 +4,14 @@ package MoveTest;
 import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 
 
 // Hauptklasse
 public class MoveTest {
-    public static void RunGame(int width, int height, int bitDepth, int refreshRate) {
+    public static void RunGame(int width, int height, int bitDepth, int refreshRate, boolean fullscreen, boolean customResolution) {
         
         //Spieler, Hintergrund und das Frame werden erstellt. 
         
@@ -34,9 +35,17 @@ public class MoveTest {
         GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice device = environment.getDefaultScreenDevice();
         
-        device.setFullScreenWindow(f);
-        device.setDisplayMode(displayMode);
-        long lastFrame = System.currentTimeMillis();
+        if (fullscreen = true) {
+			device.setFullScreenWindow(f);
+		}
+		
+        
+		//Commented this out cause i switched my desktop to Linux and used closed nvidia driver and this driver is bullshit
+		
+        if (customResolution = false) {
+			device.setDisplayMode(displayMode);
+		}
+		long lastFrame = System.currentTimeMillis();
         
         //Ein Loop der abfragen taetigt die durchgehend laufen muessen.
         while(true){
@@ -48,6 +57,9 @@ public class MoveTest {
             player.update(timeSinceLastFrame);
             bg.update(timeSinceLastFrame);
             f.repaintScreen();
+            
+            //To fix massive lags with the Linux, flushes the Graphics buffer which Linux uses.
+            Toolkit.getDefaultToolkit().sync();
             
             
             try {
