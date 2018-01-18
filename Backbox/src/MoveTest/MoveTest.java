@@ -68,13 +68,6 @@ public class MoveTest {
             
             //To fix massive lags with the Linux, flushes the Graphics buffer which Linux uses.
             Toolkit.getDefaultToolkit().sync();
-            
-            
-            try {
-                Thread.sleep(15);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
         
     }

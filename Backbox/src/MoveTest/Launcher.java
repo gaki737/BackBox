@@ -117,8 +117,8 @@ public class Launcher extends JFrame {
 		btnLaunch.setBounds(12, 278, 446, 25);
 		btnLaunch.addActionListener(new ActionListener() {
 			
-		boolean fullscreen;
-		boolean customResolution;
+		boolean fullscreen = false;
+		boolean customResolution = false;
 		
 			public void actionPerformed(ActionEvent arg0) 
 			{
