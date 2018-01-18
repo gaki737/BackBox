@@ -6,6 +6,8 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.util.LinkedList;
+
 import javax.swing.JFrame;
 
 
@@ -15,9 +17,11 @@ public class MoveTest {
         
         //Spieler, Hintergrund und das Frame werden erstellt. 
         
-        Player player = new Player(300, 300, 50, width, height);
+    	
+    	LinkedList<Bullet> bullets = new LinkedList<Bullet>();
+        Player player = new Player(300, 300, 50, width, height, bullets);
         Background bg = new Background(100);
-        Frame f = new Frame(player, bg);
+        Frame f = new Frame(player, bg, bullets);
         
         //Das Frame wird gesetzt
         
@@ -58,12 +62,16 @@ public class MoveTest {
             bg.update(timeSinceLastFrame);
             f.repaintScreen();
             
+            for(int i = 0; i<bullets.size(); i++){
+            	bullets.get(i).update(timeSinceLastFrame);
+            }
+            
             //To fix massive lags with the Linux, flushes the Graphics buffer which Linux uses.
             Toolkit.getDefaultToolkit().sync();
             
             
             try {
-                Thread.sleep(1000/refreshRate);
+                Thread.sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

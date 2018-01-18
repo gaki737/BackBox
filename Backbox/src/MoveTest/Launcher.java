@@ -1,6 +1,5 @@
 package MoveTest;
 
-import java.awt.BorderLayout;
 import java.awt.DisplayMode;
 import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
@@ -213,7 +212,10 @@ public class Launcher extends JFrame {
 		
 	    for (DisplayMode displayMode : ds) 
 	    {
-			comboBox.addItem(displayMode.getWidth() + "x" + displayMode.getHeight() + " " + displayMode.getRefreshRate() + "Hz " + displayMode.getBitDepth());
+			comboBox.addItem(displayMode.getWidth() + "x" + 
+							 displayMode.getHeight() + " " + 
+							 displayMode.getRefreshRate() + "Hz " + 
+							 displayMode.getBitDepth());
 		}
 	    
 	}
