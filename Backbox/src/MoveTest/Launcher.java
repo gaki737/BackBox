@@ -4,7 +4,6 @@ import java.awt.DisplayMode;
 import java.awt.EventQueue;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,10 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
+@SuppressWarnings("serial")
 public class Launcher extends JFrame {
 
+	
 	private static Launcher frame;
 	private JPanel contentPane;
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboBox;
 	
 	
@@ -56,6 +58,8 @@ public class Launcher extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	@SuppressWarnings("rawtypes")
 	public Launcher() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -124,14 +128,14 @@ public class Launcher extends JFrame {
 			{
 				final int chosenSetting = comboBox.getSelectedIndex();
 				
-				if (chckbxFullscreen.isEnabled()){
+				if (chckbxFullscreen.isSelected()){
 					fullscreen = true;
 				}
 				else{
 					fullscreen = false;
 				}
 				
-				if (chckbxcustomres.isEnabled()) {
+				if (chckbxcustomres.isSelected()) {
 					
 					customResolution = true;
 					
