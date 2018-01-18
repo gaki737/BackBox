@@ -4,21 +4,26 @@ package MoveTest;
 import java.awt.DisplayMode;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.util.LinkedList;
+
 import javax.swing.JFrame;
 
 
-// Hauptklasse
+// Main class
 public class MoveTest {
-    public static void RunGame(int width, int height, int bitDepth, int refreshRate) {
+    public static void RunGame(int width, int height, int bitDepth, int refreshRate, boolean fullscreen, boolean customResolution) {
         
-        //Spieler, Hintergrund und das Frame werden erstellt. 
+        //Player, Background, Frame and Bullet is initialized
         
-        Player player = new Player(300, 300, 50, width, height);
+    	
+    	LinkedList<Bullet> bullets = new LinkedList<Bullet>();
+        Player player = new Player(300, 300, 50, width, height, bullets);
         Background bg = new Background(100);
-        Frame f = new Frame(player, bg);
+        Frame f = new Frame(player, bg, bullets);
         
-        //Das Frame wird gesetzt
+        //Frame settings
         
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(width, height);
@@ -28,17 +33,21 @@ public class MoveTest {
         f.setLocationRelativeTo(null);
         f.makeStrat();
 
-//      Fullscreen funktioniert auf meinem System nicht so ganz da ich keinen Desktop
-//      sondern einen WindowManager habe, deswegen lasse ich den Fullscreen aussen vor.
         DisplayMode displayMode = new DisplayMode (width, height, bitDepth, refreshRate);
         GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice device = environment.getDefaultScreenDevice();
         
-        device.setFullScreenWindow(f);
-        device.setDisplayMode(displayMode);
-        long lastFrame = System.currentTimeMillis();
+        if (fullscreen = true) {
+			device.setFullScreenWindow(f);
+		}
+		
+        if (customResolution = false) {
+			device.setDisplayMode(displayMode);
+		}
         
-        //Ein Loop der abfragen taetigt die durchgehend laufen muessen.
+		long lastFrame = System.currentTimeMillis();
+        
+        //Loop that updates important things
         while(true){
             if(Keyboard.isKeyDown(KeyEvent.VK_ESCAPE))System.exit(0);
             long thisFrame = System.currentTimeMillis();
@@ -49,12 +58,16 @@ public class MoveTest {
             bg.update(timeSinceLastFrame);
             f.repaintScreen();
             
+            for(int i = 0; i<bullets.size(); i++){
+            	bullets.get(i).update(timeSinceLastFrame);
+            }
             
             try {
-                Thread.sleep(1000/refreshRate);
+            	Thread.sleep(15);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+            	e.printStackTrace();
             }
+            
         }
         
     }
